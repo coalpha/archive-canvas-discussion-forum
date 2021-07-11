@@ -1,0 +1,21 @@
+{
+   "name": "archive-canvas-discussion-forum",
+   "author": "coalpha",
+   "bin": {
+      "archive-canvas-discussion-forum": "src/cli.js"
+   },
+   "scripts": {
+      "start": "node src/cli",
+      "build": "rollup -c"
+   },
+   "dependencies": {
+      "clipboardy": "^2.3.0",
+      "html-minifier-terser": "^5.1.1",
+      "readline-sync": "^1.4.10",
+      "unique-names-generator": "^4.5.0"
+   },
+   "devDependencies": {
+      "rollup": "^2.53.1",
+      "rollup-plugin-terser": "^7.0.2"
+   }
+}
