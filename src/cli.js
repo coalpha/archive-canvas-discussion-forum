@@ -75,9 +75,10 @@ const sanitizeTitle = title => {
 }
 const sanitizeEntry = entry => ({...entry, title: sanitizeTitle(entry.title)});
 const sanitizeReplies = replies => replies.map(
-   ({entry, replies}) => ({
-      entry: sanitizeEntry(entry),
-      replies: sanitizeReplies(replies),
+   reply => ({
+      ...reply,
+      entry: sanitizeEntry(reply.entry),
+      replies: sanitizeReplies(reply.replies),
    })
 );
 
@@ -85,7 +86,7 @@ const obj = JSON.parse(cl.readSync());
 
 const sanitized = {...obj, replies: sanitizeReplies(obj.replies)};
 
-fs.writeFileSync(jsonFile, JSON.stringify(sanitized, null, 3));
+fs.writeFileSync(jsonFile, JSON.stringify(sanitized));
 print(`Wrote ${jsonFile}`);
 const relativeStylesheet = ph.relative(dir, stylesheet).replace(/\\/g, '/');
 fs.writeFileSync(htmlFile, ht(sanitized, relativeStylesheet));

@@ -27,6 +27,8 @@ var oArticle = article =>
 function oEntry(li) {
    const o = {};
 
+   o.id = li.id;
+
    const article = li.querySelector(":scope > article");
    const replies = li.querySelector(":scope > div.replies");
 
@@ -51,6 +53,11 @@ function oEntry(li) {
 }
 
 function oDiscussionEntries(ul) {
+   // sometimes replies are just disabled
+   if (ul == null) {
+      return [];
+   }
+
    return [...ul.children]
       .map(oEntry)
       .filter(entry => entry != null)
@@ -61,7 +68,12 @@ function oDiscussionForum() {
    const topic   = document.getElementById("discussion_topic");
    const replies = document.getElementById("discussion_subentries")
       .querySelector(":scope > ul.discussion-entries");
-   return {
+
+   document
+      .querySelectorAll("div.showMore.loadNext")
+      .forEach(div => div.click());
+
+      return {
       topic: oArticle(topic),
       replies: oDiscussionEntries(replies),
    };

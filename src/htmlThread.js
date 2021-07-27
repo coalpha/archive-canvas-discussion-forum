@@ -1,38 +1,51 @@
 const {minify} = require("html-minifier-terser");
 
-const htmlEntry = ({entry, replies}, depth = 0) => /* html */ `
-   <table class="comment" style="margin-left: ${depth * 40}px;">
-      <tbody>
-         <tr>
-            <td>${entry.title}</td>
-         </tr>
-         <tr>
-            <td>${entry.msg}</td>
-         </tr>
-      </tbody>
-   </table>
-   ${replies.map(r => htmlEntry(r, depth + 1)).join('\n')}
+const depthMultiplier = 40;
+
+const htmlComment = ({id, entry, depth}) => /* html */ `
+   <tr><td>
+      <table
+         class="comment"
+         style="margin-left: ${depth * depthMultiplier}px;"
+         id="${id}">
+         <tbody>
+            <tr>
+               <td>${entry.title}</td>
+            </tr>
+            <tr>
+               <td>${entry.msg}</td>
+            </tr>
+         </tbody>
+      </table>
+   </td></td>
 `;
 
-function htmlThread({topic, replies}, stylesheet) {
+function toFlatComments({replies}) {
+   return replies.flatMap(reply => [
+      {id: reply.id, entry: reply.entry, depth: 0},
+      ...toFlatComments(reply)
+         .map(comment => ({...comment, depth: comment.depth + 1}))
+   ]);
+}
+
+function htmlThread(thread, stylesheet) {
+   const flatComments = toFlatComments(thread);
    const html = /* html */ `
       <!DOCTYPE html>
       <html>
          <head>
             <meta charset="UTF-8">
-            <title>${topic.title}</title>
+            <title>${thread.topic.title}</title>
            <link rel="stylesheet" href="${stylesheet}">
          </head>
          <body>
             <div class="topic">
-               <h1>${topic.title}</h1>
-               <div>${topic.msg}</div>
+               <h1>${thread.topic.title}</h1>
+               <div>${thread.topic.msg}</div>
             </div>
-            <table>
-               <tbody>
-                  ${replies.map(r => `<tr><td>${htmlEntry(r)}</tr></td>`).join('\n')}
-               </tbody>
-            </table>
+            <table><tbody>
+               ${flatComments.map(htmlComment).join('\n')}
+            </tbody></table>
          </body>
       </html>
    `;
