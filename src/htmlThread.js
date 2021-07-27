@@ -9,12 +9,8 @@ const htmlComment = ({id, entry, depth}) => /* html */ `
          style="margin-left: ${depth * depthMultiplier}px;"
          id="${id}">
          <tbody>
-            <tr>
-               <td>${entry.title}</td>
-            </tr>
-            <tr>
-               <td>${entry.msg}</td>
-            </tr>
+            <tr><td>${entry.title} posted at ${entry.time}</td></tr>
+            <tr><td>${entry.msg}</td></tr>
          </tbody>
       </table>
    </td></td>

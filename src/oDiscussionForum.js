@@ -9,6 +9,14 @@ function oEntryContent(entryContent) {
          console.error(header);
       }
       o.title = title.innerText;
+
+      const time = header.querySelector("time");
+      if (time) {
+         o.time = time.dateTime;
+      } else {
+         o.time = null;
+         console.warn(header);
+      }
    }
 
    const msg = entryContent.querySelector("div.message");

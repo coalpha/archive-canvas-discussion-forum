@@ -6,7 +6,7 @@
    },
    "scripts": {
       "start": "node src/cli",
-      "build": "rollup -c"
+      "build": "rollup -c && node makeBookmarklet"
    },
    "dependencies": {
       "clipboardy": "^2.3.0",
