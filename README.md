@@ -1,4 +1,4 @@
-# archive-canvas-discussion-forum
+# archive-canvas-discussion
 
 <img src="res/icon.png" width=166px/>
 
@@ -10,14 +10,14 @@
 
 ## usage
 
-1. `npm i -D coarchive/archive-canvas-discussion-forum`.
+1. `npm i -D coarchive/archive-canvas-discussion`.
    Do not install globally on Windows! It just doesn't work for some reason.
 2. Optionally, grab yourself a copy of [style.css](src/style.css) and stick it
    somewhere. This is what you can use instead of the builtin stylesheet.
 3. Make a bookmarklet with [this file's content](bin/bookmarklet.min.js) as the url.
 4. Go to the discussion forum page you want to archive and click it.
 5. Copy that JSON output.
-6. `archive-canvas-discussion-forum`
+6. `archive-canvas-discussion`
 7. Respond to the prompt.
 
 ```

@@ -6,6 +6,6 @@ if (js.endsWith(";\n")) {
 }
 
 fs.writeFileSync(
-   `${__dirname}/bin/bookmarklet.min.js`,
+   `${__dirname}/bin/bookmarklet.min.url`,
    `javascript:void(${js})`
 );

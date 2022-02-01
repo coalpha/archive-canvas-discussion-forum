@@ -1,8 +1,9 @@
 {
-   "name": "archive-canvas-discussion-forum",
+   "name": "archive-canvas-discussion",
+   "version": "0.0.2",
    "author": "coalpha",
    "bin": {
-      "archive-canvas-discussion-forum": "src/cli.js"
+      "archive-canvas-discussion": "src/cli.js"
    },
    "scripts": {
       "start": "node src/cli",

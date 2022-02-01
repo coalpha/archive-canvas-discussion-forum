@@ -1,6 +1,7 @@
 # I keep reflexively typing make
 
-build:
-	npm run build
+bookmarklet.min.url: oDiscussionForum.min.js
+	node makeBookmarklet
 
-.PHONY: build
+oDiscussionForum.min.js:
+	npm run build
