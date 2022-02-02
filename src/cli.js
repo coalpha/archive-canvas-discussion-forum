@@ -29,14 +29,9 @@ const print = s => process.stdout.write(`${s}\n`);
 
 if (!("stylesheet" in o)) {
    print("Where is style.css?");
-   print("Empty entry means use default");
    o.stylesheet = rl.prompt();
 }
 
-if (o.stylesheet === "") {
-   print("Using builtin style.css");
-   o.stylesheet = `${__dirname}/style.css`;
-}
 const {stylesheet} = o;
 
 if (!("dir" in o)) {
@@ -54,6 +49,7 @@ const {name} = o;
 if (!("exclude" in o)) {
    print("Anyone you'd like to exclude from name scrubbing?");
    print("Enter a comma delimited string.")
+   print("* means no name scrubbing.")
    o.exclude = rl.prompt();
 }
 const exclude = o.exclude.split(',');
@@ -64,7 +60,13 @@ rl.question("Then press enter when done...\n");
 const jsonFile = `${dir}/${name}.json`;
 const htmlFile = `${dir}/${name}.html`;
 
-const sanitizeName = name => exclude.includes(name) ? name : sn(name);
+var sanitizeName;
+if (exclude.includes("*")) {
+   sanitizeName = name => name;
+} else {
+   sanitizeName = name => exclude.includes(name) ? name : sn(name);
+}
+
 const sanitizeTitle = title => {
    if (title.startsWith("Deleted by ")) {
       const on = title.lastIndexOf("on");

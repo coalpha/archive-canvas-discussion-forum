@@ -34,3 +34,7 @@ code {
    color: #ddd;
    margin: .5em;
 }
+
+pre > code {
+   margin: 0 !important;
+}

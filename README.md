@@ -36,4 +36,6 @@ Options can be given through command line arguments to skip the prompt. In the a
 - `--stylesheet:<path>`
 - `--dir:<path>`
 - `--name:<name>`
-- `--exclude:<name,name>`
+- `--exclude:<name,name,*>`
+
+To exclude all names from scrubbing, use `*`.
